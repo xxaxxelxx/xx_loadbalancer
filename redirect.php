@@ -15,11 +15,13 @@ $db-> exec("CREATE TABLE IF NOT EXISTS t_pool(
    machineip TEXT NOT NULL DEFAULT '0.0.0.0',
    bandwidth INTEGER NOT NULL DEFAULT 0,
    bandwidthlimit INTEGER NOT NULL DEFAULT 0, 
-  mountpoint TEXT NOT NULL DEFAULT '/unknown',
+   load INTEGER NOT NULL DEFAULT 0, 
+   listeners INTEGER NOT NULL DEFAULT 0, 
+   mountpoint TEXT NOT NULL DEFAULT '/unknown',
    timestamp INTEGER NOT NULL DEFAULT $tstampnow)");
-$db->exec("DELETE FROM t_pool WHERE timestamp < $maxagelimitstamp");
 
 $result = $db->query("SELECT * FROM t_pool WHERE mountpoint LIKE '$mountpoint' AND timestamp > $tstampoldest ORDER BY bandwidth ASC LIMIT 1");
+$db->close();
 
 $errortext = "this stream is not available";
 $errorspeech = urlencode($errortext);

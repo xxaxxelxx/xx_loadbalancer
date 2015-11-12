@@ -19,14 +19,12 @@ $maxagelimitstamp = $tstampnow - $maxage;
 cleanup_db($maxagelimitstamp);
 
 $a_mountpoints =  preg_split("/[|,]+/",$mountpoints);
+
 $listeners = 99;
 
 $db = new SQLite3('load.db');
 foreach ($a_mountpoints as $mountpoint) {
-    $a_listeners_per_mountpoint = preg_split("/[@]+/",$mountpoint);
-    $listeners = $a_listeners_per_mountpoint[0];
-    $mnt = $a_listeners_per_mountpoint[1];
-    $target = $ip."_".$mnt;
+    $target = $ip."_".$mountpoint;
     $db->exec("REPLACE INTO t_pool (
 	target,
 	machineip,
@@ -41,7 +39,7 @@ foreach ($a_mountpoints as $mountpoint) {
 	$bandwidth,
 	$bandwidthlimit,
 	$listeners,
-	'$mnt',
+	'$mountpoint',
 	$load,
 	$tstampnow)");
 }; 
