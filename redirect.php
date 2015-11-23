@@ -1,40 +1,53 @@
 <?php
 $ip = getenv('REMOTE_ADDR');
+$agent = getenv('HTTP_USER_AGENT');
 $mountpoint = $_GET['mnt'];
+include("functions.php");
+init_db();
+
 $tstampnow = time();
 $tmaxage = 10;
 $tstampoldest = $tstampnow - $tmaxage;
 
 error_reporting(E_ALL);
 
-if ( ! isset($ip,$mountpoint) ) exit;
+$maxage = 3600;
+$maxagelimitstamp = $tstampnow - $maxage; 
+cleanup_listeners($maxagelimitstamp);
+
+if ( ! isset($ip,$agent,$mountpoint) ) exit;
+
+$fingerprint = md5($ip.$agent.$mountpoint);
 
 $db = new SQLite3('load.db');
-$db-> exec("CREATE TABLE IF NOT EXISTS t_pool(
-   target TEXT PRIMARY KEY DEFAULT 'default', 
-   machineip TEXT NOT NULL DEFAULT '0.0.0.0',
-   bandwidth INTEGER NOT NULL DEFAULT 0,
-   bandwidthlimit INTEGER NOT NULL DEFAULT 0, 
-   load INTEGER NOT NULL DEFAULT 0, 
-   listeners INTEGER NOT NULL DEFAULT 0, 
-   mountpoint TEXT NOT NULL DEFAULT '/unknown',
-   timestamp INTEGER NOT NULL DEFAULT $tstampnow)");
+$result = $db->query("SELECT * FROM t_pool WHERE mountpoint LIKE '/$mountpoint' AND timestamp > $tstampoldest ORDER BY bandwidth ASC LIMIT 1");
+#echo $db->lastErrorMsg();
 
-$result = $db->query("SELECT * FROM t_pool WHERE mountpoint LIKE '$mountpoint' AND timestamp > $tstampoldest ORDER BY bandwidth ASC LIMIT 1");
-$db->close();
+$wellknown = $db->query("SELECT * FROM t_listeners WHERE fingerprint = '$fingerprint'");
 
 $errortext = "this stream is not available";
 $errorspeech = urlencode($errortext);
 
-if (empty(array_filter($result))) {
-    $redirect = "Location: http://translate.google.com/translate_tts?tl=en&q=".$errorspeech;
+$redirect = "Location: http://translate.google.com/translate_tts?tl=en&q=".$errorspeech;
+$prefix = "/intro.";
+
+while ( $wrow = $wellknown->fetchArray() ) {
+    $prefix = "/";
+}
+while ( $row = $result->fetchArray() ) {
+    $mount = ltrim($row['mountpoint'],'/');
+    $redirect = "Location: http://".$row['machineip'].$prefix.$mount;
 }
 
-while ( $row = $result->fetchArray() ) {
-    $redirect = "Location: http://".$row['machineip']."/".$row['mountpoint'];
-}
+$db->exec("REPLACE INTO t_listeners (
+	fingerprint,
+	timestamp) VALUES (
+	'$fingerprint',
+	$tstampnow)");
+
+$db->close();
 
 header($redirect);
 
 ?>
-http://translate.google.com/translate_tts?tl=en&q=%22this%20stream%20is%20not%20available%22
+

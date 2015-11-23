@@ -16,7 +16,7 @@ if ( ! isset($ip,$bandwidth,$bandwidthlimit,$mountpoints,$load) ) exit;
 
 $maxage = 3600;
 $maxagelimitstamp = $tstampnow - $maxage; 
-cleanup_db($maxagelimitstamp);
+cleanup_pool($maxagelimitstamp);
 
 $a_mountpoints =  preg_split("/[|,]+/",$mountpoints);
 $listeners = 99;
