@@ -33,8 +33,8 @@ switch ($mountpoint) {
     case 'rt_schwerin.mp3':
 	header("Location: http://141.16.141.3/rt_schwerin.mp3");
         exit;
-# very special
-    case 'ostseewelle.mp3':
+# very special | rewrite some stuff
+    case 'egal.mp3':
 	header("Location: http://".getenv('HTTP_HOST')."/bbradio.mp3");
         exit;
 }
