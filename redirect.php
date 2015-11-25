@@ -9,10 +9,10 @@ $tstampnow = time();
 
 # static switches
 switch ($mountpoint) {
-    case '/bbr_master.mp3':
+    case 'bbr_master.mp3':
 	header("Location: http://141.16.141.4/bbr_master.mp3");
         exit;
-    case '/tdy_master.mp3':
+    case 'tdy_master.mp3':
 	header("Location: http://141.16.141.4/tdy_master.mp3");
         exit;
     case '/bbr_cable.mp3':
@@ -21,16 +21,16 @@ switch ($mountpoint) {
     case '/rt_cable.mp3':
 	header("Location: http://141.16.141.4/rt_cable.mp3");
         exit;
-    case "/rt_bremen.mp3":
+    case '/rt_bremen.mp3':
 	header("Location: http://141.16.141.3/rt_bremen.mp3");
         exit;
-    case "/rt_kassel.mp3":
+    case '/rt_kassel.mp3':
 	header("Location: http://141.16.141.3/rt_kassel.mp3");
         exit;
-    case "/rt_koblenz.mp3":
+    case '/rt_koblenz.mp3':
 	header("Location: http://141.16.141.3/rt_koblenz.mp3");
         exit;
-    case "/rt_schwerin.mp3":
+    case '/rt_schwerin.mp3':
 	header("Location: http://141.16.141.3/rt_schwerin.mp3");
         exit;
 }
