@@ -35,7 +35,7 @@ switch ($mountpoint) {
         exit;
 # very special
     case 'ostseewelle.mp3':
-	header("Location: http://127.0.0.1/bbradio.mp3");
+	header("Location: http://".getenv('HTTP_HOST')."/bbradio.mp3");
         exit;
 }
 
