@@ -10,7 +10,7 @@ $db = new SQLite3('load.db');
 $results = $db->query("SELECT mountpoint FROM t_pool where mountpoint like '%$mountpoint%' and mountpoint not like '/intro%' group by mountpoint order by mountpoint");
 
 while ( $row = $results->fetchArray() ) {
-   echo $row['mountpoint'];
+   echo $row['mountpoint']."\n";
 }
 $db->close();
 
