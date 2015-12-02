@@ -10,14 +10,10 @@ $db = new SQLite3('load.db');
 $results = $db->query("SELECT machineip,bandwidth,bandwidthlimit,load FROM t_pool group by machineip");
 
 while ( $row = $results->fetchArray() ) {
-   echo "1.2.3.4"."|";
-   echo "64"."|";
-   echo "0"."|";
-   echo "99"."\n";
-   echo "1.2.3.5"."|";
-   echo "128"."|";
-   echo "0"."|";
-   echo "88"."\n";
+   echo $row['machineip']."|";
+   echo $row['bandwidth']."|";
+   echo $row['bandwidthlimit']."|";
+   echo $row['load']."\n";
 }
 $db->close();
 ?>
