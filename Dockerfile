@@ -29,6 +29,8 @@ COPY entrypoint.sh /entrypoint.sh
 
 ENV UPDATEPASSWORD="my-_-password"
 
+VOLUME /dev/shm
+
 EXPOSE 80
 
 ENTRYPOINT [ "/entrypoint.sh" ]
