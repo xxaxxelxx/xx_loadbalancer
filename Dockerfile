@@ -29,7 +29,7 @@ COPY entrypoint.sh /entrypoint.sh
 
 ENV UPDATEPASSWORD="my-_-password"
 
-VOLUME /dev/shm
+#VOLUME /dev/shm
 
 EXPOSE 80
 
