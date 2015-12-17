@@ -58,7 +58,8 @@ if ( ! isset($ip,$agent,$mountpoint) ) exit;
 $fingerprint = md5($ip.$agent.$mountpoint);
 
 $db = new SQLite3('load.db');
-$result = $db->query("SELECT * FROM t_pool WHERE mountpoint LIKE '/$mountpoint' AND load <= $maxload AND timestamp > $tstampoldest ORDER BY bandwidth ASC LIMIT 1");
+#$result = $db->query("SELECT * FROM t_pool WHERE mountpoint LIKE '/$mountpoint' AND load <= $maxload AND timestamp > $tstampoldest ORDER BY bandwidth ASC LIMIT 1");
+$result = $db->query("SELECT * FROM t_pool WHERE mountpoint LIKE '/$mountpoint' AND load <= $maxload AND timestamp > $tstampoldest AND ( bandwidthlimit = 0 OR bandwidth < bandwidthlimit ) ORDER BY bandwidth ASC LIMIT 1");
 #echo $db->lastErrorMsg();
 
 $wellknown = $db->query("SELECT * FROM t_listeners WHERE fingerprint = '$fingerprint'");
