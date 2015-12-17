@@ -9,7 +9,7 @@ error_reporting(E_ALL);
 $db = new SQLite3('load.db');
 $results = $db->query("SELECT machineip,bandwidth,bandwidthlimit,load,timestamp FROM t_pool group by machineip");
 
-echo "<table>";
+echo "<table align=right>";
 echo "<tr><th>TSTAMP</th><th>IP</th><th>BW</th><th>BWLIMIT</th><th>LOAD</th></tr>\n";
 while ( $row = $results->fetchArray() ) {
     echo "<tr>";
