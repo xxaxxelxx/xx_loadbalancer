@@ -1,0 +1,42 @@
+th.rotate {
+  /* Something you can count on */
+  height: 140px;
+  white-space: nowrap;
+    vertical-align: center;
+}
+
+th.rotate > div {
+  transform: 
+    /* Magic Numbers */
+    translate(20px, 65px)
+    /* 45 is really 360 - 45 */
+    rotate(290deg);
+  width: 0px
+}
+th.rotate > div > span {
+  border-bottom: 1px solid grey;
+  padding: 5px 10px;
+}
+
+table {
+position: absolute;
+top: 100px;
+border: 1px;
+}
+
+td {
+    width: 4em;
+    border-right: solid grey 1px;
+}
+
+div.A {
+    background-color: lightgrey;
+}
+div.B {
+    background-color: lightblue;
+}
+
+th {
+    text-align: left;
+    vertical-align: center;
+}
