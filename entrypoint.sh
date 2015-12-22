@@ -8,6 +8,7 @@ fi
 
 mkdir -p /dev/shm/html
 cp /var/www/html/*.php /dev/shm/html/ 
+cp /var/www/html/*.css /dev/shm/html/ 
 cp /var/www/html/*.html /dev/shm/html/ 
 chown -R www-data /dev/shm/html/
 #bash
