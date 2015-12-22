@@ -25,8 +25,8 @@ border: 1px;
 }
 
 td {
-    width: 4em;
-    border-right: solid grey 1px;
+    width: 3em;
+    xborder-right: solid grey 1px;
 }
 
 div.A {
