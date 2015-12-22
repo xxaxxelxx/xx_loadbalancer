@@ -46,6 +46,12 @@ div.B {
     font-weight: bold;
 }
 
+div.DEAD {
+    background-color: lightred;
+    color: black;
+    font-weight: bold;
+}
+
 th {
     text-align: left;
     vertical-align: center;
