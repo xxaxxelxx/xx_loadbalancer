@@ -16,7 +16,7 @@ include 'adminboard.css';
 echo "</style>";
 
 echo "<table borderx=1>";
-echo "<tr><th class=rotatex><div><span>TSTAMP</th><th class=rotatex><div><span>IP</th><th class=rotatex><div><span>BW</th><th class=rotatex><div><span>BWLIMIT</th><th class=rotatex><div><span>LOAD</th>";
+echo "<tr><th class=rotatex><div><span>TSTAMP</span></div></th><th class=rotatex><div><span>IP</span></div></th><th class=rotatex><div><span>BW</span></div></th><th class=rotatex><div><span>BWLIMIT</span></div></th><th class=rotatex><div><span>LOAD</span></div></th><th class=rotatex><div><span>LISTENERS</span></div></th>";
     while ( $row2 = $results2->fetchArray() ) {
     echo "<th class=rotate><div><span>".$row2['mountpoint']."</span></div></th>";
     }
@@ -31,6 +31,11 @@ while ( $row = $results->fetchArray() ) {
     echo "<td align=right><div class=$LINESTYLE><span>".$row['bandwidth']."</span></div></td>";
     echo "<td align=right><div class=$LINESTYLE><span>".$row['bandwidthlimit']."</span></div></td>";
     echo "<td align=right><div class=$LINESTYLE><span>".$row['load']."</span></div></td>\n";
+    $results5 = $db->query("SELECT listeners FROM t_pool where machineip like \"".$row['machineip']."\" ");
+    while ( $row5 = $results5->fetchArray() ) {
+        $listenersum = $row5['listeners'];
+    }
+    echo "<td align=right><div class=$LINESTYLE><span>".$listenersum."</span></div></td>\n";
 
     while ( $row2 = $results2->fetchArray() ) {
     $mountpoint = ltrim ($row2['mountpoint'], '/');
