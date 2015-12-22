@@ -35,11 +35,7 @@ while ( $row = $results->fetchArray() ) {
     while ( $row5 = $results5->fetchArray() ) {
         $listenersum = $row5[0];
     }
-    $intromounts2 = $db->query("SELECT listeners FROM t_pool where machineip like \"".$row['machineip']."\" and mountpoint like '/intro%'");
-    $numberof_intromounts2 = 0; while ( $row6 = $intromounts2->fetchArray() ) { $numberof_intromounts2++; };
-    $printlistenersum = $listenersum - $numberof_intromounts2;
-
-    echo "<td align=right><div class=$LINESTYLE><span>".$printlistenersum."</span></div></td>\n";
+    echo "<td align=right><div class=$LINESTYLE><span>".$listenersum."</span></div></td>\n";
 
     while ( $row2 = $results2->fetchArray() ) {
     $mountpoint = ltrim ($row2['mountpoint'], '/');
