@@ -14,7 +14,19 @@ header("refresh: 1;");
 echo "<style>";
 include 'tacticsboard.css';
 echo "</style>";
+echo "<div><span class=headline>TACTICS</span></div>";
+echo "<div><span class=tstamp>".date(DATE_RFC822)."</span></div>";
+echo "<hr><br>";
 
+$results7 = $db->query("SELECT sum(listeners) FROM t_pool");
+while ( $row7 = $results7->fetchArray() ) {
+    $listenersumsum = $row7[0];
+}
+$intromounts7 = $db->query("SELECT listeners FROM t_pool where mountpoint like '/intro%'");
+$numberof_intromounts7 = 0; while ( $row8 = $intromounts7->fetchArray() ) { $numberof_intromounts7++; };
+$printlistenersumsum = $listenersumsum - $numberof_intromounts7;
+echo "<div><span class=sumsum>".$printlistenersumsum."</span></div>";
+echo "<hr><br><br>";
 echo "<table borderx=1>";
 echo "<tr><th class=rotatex><div><span>TSTAMP</span></div></th><th class=rotatex><div><span>IP</span></div></th><th class=rotatex><div><span>BW</span></div></th><th class=rotatex><div><span>BWLIMIT</span></div></th><th class=rotatex><div><span>LOAD</span></div></th><th class=rotatex><div><span>LISTENERS</span></div></th>";
     while ( $row2 = $results2->fetchArray() ) {

@@ -21,7 +21,7 @@ COPY lighttpd.conf /etc/lighttpd/lighttpd.conf
 COPY *.php /var/www/html/
 COPY *.css /var/www/html/
 COPY *.html /var/www/html/
-COPY *.mp3 /var/www/html/
+#COPY *.mp3 /var/www/html/
 COPY lighttpd-plain.user /etc/lighttpd/
 RUN chown -R www-data /etc/lighttpd
 RUN chown -R www-data /var/www/html
