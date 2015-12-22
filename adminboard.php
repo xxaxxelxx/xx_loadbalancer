@@ -46,7 +46,7 @@ while ( $row = $results->fetchArray() ) {
         $intromounts = $db->query("SELECT listeners FROM t_pool where machineip like \"".$row['machineip']."\" and mountpoint like '/intro.$mountpoint'");
         $numberof_intromounts = 0; while ( $row4 = $intromounts->fetchArray() ) { $numberof_intromounts++; };
         $printlisteners = $listeners - $numberof_intromounts;
-        echo "<td align=right><div class=$LINESTYLE><span style='background-color: green;'">".$printlisteners."</span></div></th>";
+        echo "<td align=right><div class=$LINESTYLE><span style='background-color: green;'>".$printlisteners."</span></div></th>";
     }
     }
     echo "</tr>";
