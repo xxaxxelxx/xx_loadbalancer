@@ -43,7 +43,7 @@ $LINESTYLE = '';
 while ( $row = $results->fetchArray() ) {
     if ( $LINESTYLE == 'A' ) { $LINESTYLE = 'B'; } else { $LINESTYLE = 'A';};
     echo "<tr>";
-    if ( $row['timestamp'] < $dead ) { $LINESTYLE = 'DEAD' };
+    if ( $row['timestamp'] < $dead ) { $LINESTYLE = 'DEAD'; };
     echo "<td align=right><div class=$LINESTYLE><span>".$row['timestamp']."</span></div></td>";
     echo "<td align=left><div class=$LINESTYLE><span>".$row['machineip']."</span></div></td>";
     echo "<td align=right><div class=$LINESTYLE><span>".$row['bandwidth']."</span></div></td>";
@@ -73,7 +73,11 @@ while ( $row = $results->fetchArray() ) {
         $intromounts = $db->query("SELECT listeners FROM t_pool where machineip like \"".$row['machineip']."\" and mountpoint like '/intro.$mountpoint'");
         $numberof_intromounts = 0; while ( $row4 = $intromounts->fetchArray() ) { $numberof_intromounts++; };
         $printlisteners = $listeners - $numberof_intromounts;
-        echo "<td align=right><div class=$LINESTYLE style='background-color: lightgreen;'><span>".$printlisteners."</span></div></th>";
+	if ( $LINESTYLE == 'DEAD' ) {
+    	    echo "<td align=right><div class=$LINESTYLE><span>".$printlisteners."</span></div></th>";
+	} else {
+    	    echo "<td align=right><div class=$LINESTYLE style='background-color: lightgreen;'><span>".$printlisteners."</span></div></th>";
+	}
     }
     }
     echo "</tr>";
