@@ -28,7 +28,7 @@ $printlistenersumsum = $listenersumsum - $numberof_intromounts7;
 
 $date = new DateTime();
 $now = $date->getTimestamp();
-$dead = ( $now - 30 );
+$dead = ( $now - 60 );
 
 echo "<div><span class=sumsum>".$printlistenersumsum."</span></div>";
 echo "<hr><br><br>";
