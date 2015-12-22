@@ -31,7 +31,7 @@ while ( $row = $results->fetchArray() ) {
     echo "<td align=right><div class=$LINESTYLE><span>".$row['bandwidth']."</span></div></td>";
     echo "<td align=right><div class=$LINESTYLE><span>".$row['bandwidthlimit']."</span></div></td>";
     echo "<td align=right><div class=$LINESTYLE><span>".$row['load']."</span></div></td>\n";
-    $results5 = $db->query("SELECT listeners FROM t_pool where machineip like \"".$row['machineip']."\" ");
+    $results5 = $db->query("SELECT sum(listeners) FROM t_pool where machineip like \"".$row['machineip']."\" ");
     while ( $row5 = $results5->fetchArray() ) {
         $listenersum = $row5['listeners'];
     }
@@ -39,7 +39,7 @@ while ( $row = $results->fetchArray() ) {
 
     while ( $row2 = $results2->fetchArray() ) {
     $mountpoint = ltrim ($row2['mountpoint'], '/');
-    $results3 = $db->query("SELECT listeners FROM t_pool where mountpoint like \"%".$mountpoint."\" and machineip like \"".$row['machineip']."\" ");
+    $results3 = $db->query("SELECT sum(listeners) FROM t_pool where mountpoint like \"%".$mountpoint."\" and machineip like \"".$row['machineip']."\" ");
     
     $listeners = '';
     while ( $row3 = $results3->fetchArray() ) {
