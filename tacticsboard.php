@@ -33,7 +33,7 @@ while ( $row = $results->fetchArray() ) {
     echo "<td align=right><div class=$LINESTYLE><span>".$row['load']."</span></div></td>\n";
     $results5 = $db->query("SELECT sum(listeners) FROM t_pool where machineip like \"".$row['machineip']."\" ");
     while ( $row5 = $results5->fetchArray() ) {
-        $listenersum = $row5['listeners'];
+        $listenersum = $row5[0];
     }
     echo "<td align=right><div class=$LINESTYLE><span>".$listenersum."</span></div></td>\n";
 
@@ -43,7 +43,7 @@ while ( $row = $results->fetchArray() ) {
     
     $listeners = '';
     while ( $row3 = $results3->fetchArray() ) {
-        $listeners = $row3['listeners'];
+        $listeners = $row3[0];
     }
     if ( $listeners == '' ) {
         echo "<td align=right><div class=$LINESTYLE><span>&nbsp;</span></div></th>";
