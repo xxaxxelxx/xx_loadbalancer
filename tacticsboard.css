@@ -47,7 +47,12 @@ div.B {
 }
 
 div.DEAD {
-    background-color: deeppink;
+    background-color: gray;
+    color: black;
+    font-weight: bold;
+}
+div.OVERLOAD {
+    background-color: crimson;
     color: black;
     font-weight: bold;
 }
