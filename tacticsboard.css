@@ -20,7 +20,7 @@ th.rotate > div > span {
 
 table {
 position: absolute;
-top: 100px;
+top: 120px;
 border: 1px;
 }
 
@@ -39,4 +39,9 @@ div.B {
 th {
     text-align: left;
     vertical-align: center;
+}
+
+span.headline {
+    font-size: 16;
+    font-decoration: bold; 
 }
