@@ -51,8 +51,18 @@ div.DEAD {
     color: black;
     font-weight: bold;
 }
-div.OVERLOAD {
-    background-color: crimson;
+div.OVERLOAD66 {
+    background-color: yellow;
+    color: black;
+    font-weight: bold;
+}
+div.OVERLOAD75 {
+    background-color: orange;
+    color: black;
+    font-weight: bold;
+}
+div.OVERLOAD90 {
+    background-color: deeppink;
     color: black;
     font-weight: bold;
 }
