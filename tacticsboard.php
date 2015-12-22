@@ -27,6 +27,7 @@ $numberof_intromounts7 = 0; while ( $row8 = $intromounts7->fetchArray() ) { $num
 $printlistenersumsum = $listenersumsum - $numberof_intromounts7;
 echo "<div><span class=sumsum>".$printlistenersumsum."</span></div>";
 echo "<hr><br>";
+
 echo "<table borderx=1>";
 echo "<tr><th class=rotatex><div><span>TSTAMP</span></div></th><th class=rotatex><div><span>IP</span></div></th><th class=rotatex><div><span>BW</span></div></th><th class=rotatex><div><span>BWLIMIT</span></div></th><th class=rotatex><div><span>LOAD</span></div></th><th class=rotatex><div><span>LISTENERS</span></div></th>";
     while ( $row2 = $results2->fetchArray() ) {
