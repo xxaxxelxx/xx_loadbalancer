@@ -28,7 +28,7 @@ $printlistenersumsum = $listenersumsum - $numberof_intromounts7;
 
 $date = new DateTime();
 $now = $date->getTimestamp();
-$dead = ( $now - 60 );
+$dead = ( $now - 30 );
 
 echo "<div><span class=sumsum>".$printlistenersumsum."</span></div>";
 echo "<hr><br><br>";
@@ -44,11 +44,11 @@ while ( $row = $results->fetchArray() ) {
     if ( $LINESTYLE == 'A' ) { $LINESTYLE = 'B'; } else { $LINESTYLE = 'A';};
     echo "<tr>";
     if ( $row['timestamp'] < $dead ) { $LINESTYLE = 'DEAD'; };
+    if ( $row['load'] >= 50 ) { $LINESTYLE = 'OVERLOAD'; };
     echo "<td align=right><div class=$LINESTYLE><span>".$row['timestamp']."</span></div></td>";
     echo "<td align=left><div class=$LINESTYLE><span>".$row['machineip']."</span></div></td>";
     echo "<td align=right><div class=$LINESTYLE><span>".$row['bandwidth']."</span></div></td>";
     echo "<td align=right><div class=$LINESTYLE><span>".$row['bandwidthlimit']."</span></div></td>";
-    if ( $row['load'] >= 50 ) { $LINESTYLE = 'OVERLOAD'; };
     echo "<td align=right><div class=$LINESTYLE><span>".$row['load']."</span></div></td>\n";
     $results5 = $db->query("SELECT sum(listeners) FROM t_pool where machineip like \"".$row['machineip']."\" ");
     while ( $row5 = $results5->fetchArray() ) {
