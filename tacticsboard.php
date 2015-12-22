@@ -12,7 +12,7 @@ $results2 = $db->query("SELECT mountpoint FROM t_pool where mountpoint not like 
 
 header("refresh: 1;");
 echo "<style>";
-include 'adminboard.css';
+include 'tacticsboard.css';
 echo "</style>";
 
 echo "<table borderx=1>";
