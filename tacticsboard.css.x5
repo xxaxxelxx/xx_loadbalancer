@@ -1,13 +1,8 @@
+
 body {
     background-color: black;
     color: white;
 }
-
-th.sum {
-    border-top: 1px solid gray;
-    background-color: gray;
-}
-
 
 th.rotate {
   /* Something you can count on */
@@ -19,7 +14,7 @@ th.rotate {
 th.rotate > div {
   transform: 
     /* Magic Numbers */
-    translate(35px, 65px)
+    translate(20px, 65px)
     /* 45 is really 360 - 45 */
     rotate(290deg);
   width: 0px
@@ -91,4 +86,3 @@ span.sumsum {
     font-size: 150%;
     font-decoration: bold; 
 }
-
