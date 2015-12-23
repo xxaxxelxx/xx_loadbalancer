@@ -10,7 +10,7 @@ $db = new SQLite3('load.db');
 $results = $db->query("SELECT machineip,bandwidth,bandwidthlimit,load,timestamp FROM t_pool group by machineip");
 $results2 = $db->query("SELECT mountpoint FROM t_pool where mountpoint not like \"/intro.%\" group by mountpoint order by mountpoint");
 
-header("refresh: 1;");
+header("refresh: 60;");
 echo "<style>";
 include 'tacticsboard.css';
 echo "</style>";
