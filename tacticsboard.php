@@ -59,8 +59,8 @@ while ( $row = $results->fetchArray() ) {
     if ( $LINESTYLE == 'A' ) { $LINESTYLE = 'B'; } else { $LINESTYLE = 'A';};
     echo "<tr>";
     if ( $row['timestamp'] < $dead ) { $LINESTYLE = 'DEAD'; };
-    if ( $row['load'] >= 66 ) { $LINESTYLE = 'OVERLOAD66'; };
-    if ( $row['load'] >= 75 ) { $LINESTYLE = 'OVERLOAD75'; };
+    if ( $row['load'] >= 70 ) { $LINESTYLE = 'OVERLOAD70'; };
+    if ( $row['load'] >= 80 ) { $LINESTYLE = 'OVERLOAD80'; };
     if ( $row['load'] >= 90 ) { $LINESTYLE = 'OVERLOAD90'; };
     echo "<td align=right><div class=$LINESTYLE><span>".$row['timestamp']."</span></div></td>";
     echo "<td align=left><div class=$LINESTYLE><span>".$row['machineip']."</span></div></td>";
