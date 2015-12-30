@@ -27,7 +27,7 @@ while ( $row = $results->fetchArray() ) {
     $numberof_intromounts = 0; while ( $row = $intromounts->fetchArray() ) { $numberof_intromounts++; };
 
     $listsum = $listsum_basic + $listsum_intro - $numberof_intromounts;
-    if ( $listsum < 0 ) { $listsum = 0 };
+    if ( $listsum < 0 ) { $listsum = 0; };
 
     echo $listsum."@".$mountpoint."\n";
 }
