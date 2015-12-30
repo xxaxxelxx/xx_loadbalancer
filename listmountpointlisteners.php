@@ -18,7 +18,7 @@ while ( $row = $results->fetchArray() ) {
 	    $listsum_basic = $row2[0];
 	}
     $results3 = $db->query("SELECT sum(listeners) FROM t_pool where mountpoint like '/intro.$mountpoint'");
-	while ( $row3 = $results2->fetchArray() ) {
+	while ( $row3 = $results3->fetchArray() ) {
 	    $listsum_intro = $row3[0];
 	}
 
