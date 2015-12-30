@@ -18,7 +18,7 @@ while ( $row = $results->fetchArray() ) {
 	    echo "0\n";
     } else {
 	    $number = $row[0] - $numberof_intromounts;
-	    if ( $number < 0 ) { $number = 0 };
+	    if ( $number < 0 ) { $number = 0; };
 	    echo $number."\n";
     }
 };
