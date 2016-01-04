@@ -25,11 +25,11 @@ while ( $row2 = $results2->fetchArray() ) {
     if (empty($row2[0])) {
 	$bwsum = 0;
     } else {
-	$bwsum = $row[0];
+	$bwsum = $row2[0];
     }
 }
 
-echo "$bwsum|$listnumber";
+echo $bwsum."|".$listnumber."\n";
 
 $db->close();
 ?>
