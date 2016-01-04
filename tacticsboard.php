@@ -18,6 +18,11 @@ echo "<div><span class=headline>TACTICS</span></div>";
 echo "<div><span class=tstamp>".date(DATE_RFC822)."</span></div>";
 echo "<hr><br>";
 
+$results9 = $db->query("SELECT sum(bw) FROM t_pool where mountpoint not like '%proxy%'");
+while ( $row9 = $results9->fetchArray() ) {
+    $bwsumsum = $row9[0];
+}
+
 $results7 = $db->query("SELECT sum(listeners) FROM t_pool");
 while ( $row7 = $results7->fetchArray() ) {
     $listenersumsum = $row7[0];
@@ -40,7 +45,7 @@ echo "<tr><th class=rotatex><div><span>TSTAMP</span></div></th><th class=rotatex
     }
 echo "</tr>\n";
 
-echo "<tr><th class=sumx><div><span>&nbsp;</span></div></th><th class=sumx><div><span>&nbsp;</span></div></th><th class=sumx><div><span>&nbsp;</span></div></th><th class=sumx><div><span>&nbsp;</span></div></th><th class=sumx><div><span>&nbsp;</span></div></th><th class=sum><div align=right><span>".$printlistenersumsum."</span></div></th>";
+echo "<tr><th class=sumx><div><span>&nbsp;</span></div></th><th class=sumx><div><span>&nbsp;</span></div></th><th class=sum><div><span>".$bwsumsum."</span></div></th><th class=sumx><div><span>&nbsp;</span></div></th><th class=sumx><div><span>&nbsp;</span></div></th><th class=sum><div align=right><span>".$printlistenersumsum."</span></div></th>";
     while ( $row2 = $results2->fetchArray() ) {
     $mountpoint = ltrim ($row2['mountpoint'], '/');
     $results9 = $db->query("SELECT sum(listeners) FROM t_pool where mountpoint like \"%".$mountpoint."\" ");

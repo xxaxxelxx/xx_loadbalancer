@@ -10,7 +10,7 @@ $db = new SQLite3('load.db');
 $results = $db->query("SELECT machineip,bandwidth,bandwidthlimit,load,timestamp FROM t_pool group by machineip");
 $results2 = $db->query("SELECT mountpoint FROM t_pool where mountpoint not like \"/intro.%\" group by mountpoint order by mountpoint");
 
-header("refresh: 1;");
+header("refresh: 60;");
 echo "<style>";
 include 'tacticsboard.css';
 echo "</style>";
@@ -25,12 +25,32 @@ while ( $row7 = $results7->fetchArray() ) {
 $intromounts7 = $db->query("SELECT listeners FROM t_pool where mountpoint like '/intro%'");
 $numberof_intromounts7 = 0; while ( $row8 = $intromounts7->fetchArray() ) { $numberof_intromounts7++; };
 $printlistenersumsum = $listenersumsum - $numberof_intromounts7;
+
+$date = new DateTime();
+$now = $date->getTimestamp();
+$dead = ( $now - 60 );
+
 echo "<div><span class=sumsum>".$printlistenersumsum."</span></div>";
 echo "<hr><br><br>";
 echo "<table borderx=1>";
 echo "<tr><th class=rotatex><div><span>TSTAMP</span></div></th><th class=rotatex><div><span>IP</span></div></th><th class=rotatex><div><span>BW</span></div></th><th class=rotatex><div><span>BWLIMIT</span></div></th><th class=rotatex><div><span>LOAD</span></div></th><th class=rotatex><div><span>LISTENERS</span></div></th>";
     while ( $row2 = $results2->fetchArray() ) {
-    echo "<th class=rotate><div><span>".$row2['mountpoint']."</span></div></th>";
+    $mountpoint = ltrim ($row2['mountpoint'], '/');
+    echo "<th class=rotate><div><span>".$mountpoint."</span></div></th>";
+    }
+echo "</tr>\n";
+
+echo "<tr><th class=sumx><div><span>&nbsp;</span></div></th><th class=sumx><div><span>&nbsp;</span></div></th><th class=sumx><div><span>&nbsp;</span></div></th><th class=sumx><div><span>&nbsp;</span></div></th><th class=sumx><div><span>&nbsp;</span></div></th><th class=sum><div align=right><span>".$printlistenersumsum."</span></div></th>";
+    while ( $row2 = $results2->fetchArray() ) {
+    $mountpoint = ltrim ($row2['mountpoint'], '/');
+    $results9 = $db->query("SELECT sum(listeners) FROM t_pool where mountpoint like \"%".$mountpoint."\" ");
+    while ( $row9 = $results9->fetchArray() ) {
+	$listenermntsum = $row9[0];
+    }
+    $intromounts3 = $db->query("SELECT listeners FROM t_pool where mountpoint like '/intro%".$mountpoint."'");
+    $numberof_intromounts3 = 0; while ( $row10 = $intromounts3->fetchArray() ) { $numberof_intromounts3++; };
+    $printlistenermntsum = $listenermntsum - $numberof_intromounts3;
+    echo "<th class=sum ><div align=right><span>".$printlistenermntsum."</span></div></th>";
     }
 echo "</tr>\n";
 
@@ -38,6 +58,10 @@ $LINESTYLE = '';
 while ( $row = $results->fetchArray() ) {
     if ( $LINESTYLE == 'A' ) { $LINESTYLE = 'B'; } else { $LINESTYLE = 'A';};
     echo "<tr>";
+    if ( $row['timestamp'] < $dead ) { $LINESTYLE = 'DEAD'; };
+    if ( $row['load'] >= 70 ) { $LINESTYLE = 'OVERLOAD70'; };
+    if ( $row['load'] >= 80 ) { $LINESTYLE = 'OVERLOAD80'; };
+    if ( $row['load'] >= 90 ) { $LINESTYLE = 'OVERLOAD90'; };
     echo "<td align=right><div class=$LINESTYLE><span>".$row['timestamp']."</span></div></td>";
     echo "<td align=left><div class=$LINESTYLE><span>".$row['machineip']."</span></div></td>";
     echo "<td align=right><div class=$LINESTYLE><span>".$row['bandwidth']."</span></div></td>";
@@ -67,7 +91,11 @@ while ( $row = $results->fetchArray() ) {
         $intromounts = $db->query("SELECT listeners FROM t_pool where machineip like \"".$row['machineip']."\" and mountpoint like '/intro.$mountpoint'");
         $numberof_intromounts = 0; while ( $row4 = $intromounts->fetchArray() ) { $numberof_intromounts++; };
         $printlisteners = $listeners - $numberof_intromounts;
-        echo "<td align=right><div class=$LINESTYLE style='background-color: lightgreen;'><span>".$printlisteners."</span></div></th>";
+    if ( $LINESTYLE == 'DEAD' ) {
+	    echo "<td align=right><div class=$LINESTYLE><span>".$printlisteners."</span></div></th>";
+    } else {
+	    echo "<td align=right><div class=$LINESTYLE style='background-color: lightgreen;'><span>".$printlisteners."</span></div></th>";
+    }
     }
     }
     echo "</tr>";
