@@ -1,5 +1,5 @@
 <?php
-$mountpoint = $_GET['mnt'];
+#$mountpoint = $_GET['mnt'];
 include("functions.php");
 
 init_db();
