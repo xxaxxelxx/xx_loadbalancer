@@ -19,6 +19,7 @@ echo "<div><span class=tstamp>".date(DATE_RFC822)."</span></div>";
 echo "<hr><br>";
 
 $results9 = $db->query("SELECT bandwidth,machineip FROM t_pool where mountpoint not like '%proxy%' group by machineip");
+$bwsumsum = 0;
 while ( $row9 = $results9->fetchArray() ) {
     $bwsumsum += $row9[0];
 }
@@ -88,11 +89,11 @@ while ( $row = $results->fetchArray() ) {
     $mountpoint = ltrim ($row2['mountpoint'], '/');
     $results3 = $db->query("SELECT sum(listeners) FROM t_pool where mountpoint like \"%".$mountpoint."\" and machineip like \"".$row['machineip']."\" ");
     
-    $listeners = '';
+    $listeners = NULL;
     while ( $row3 = $results3->fetchArray() ) {
         $listeners = $row3[0];
     }
-    if ( $listeners == '' ) {
+    if ( is_null($listeners) ) {
         echo "<td align=right><div class=$LINESTYLE><span>&nbsp;</span></div></td>";
     } else {
         $intromounts = $db->query("SELECT listeners FROM t_pool where machineip like \"".$row['machineip']."\" and mountpoint like '/intro.$mountpoint'");
