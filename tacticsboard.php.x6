@@ -102,7 +102,7 @@ while ( $row = $results->fetchArray() ) {
     if ( $LINESTYLE == 'DEAD' ) {
 	    echo "<td align=right><div class=$LINESTYLE><span>".$printlisteners."</span></div></td>";
     } else {
-	    echo "<td align=right><div class=$LINESTYLE style='background-color: lightgreen;'><span><a href='http://".$row['machineip']."/".$mountpoint."' >".$printlisteners."</a></span></div></td>";
+	    echo "<td align=right><div class=$LINESTYLE style='background-color: lightgreen;'><span>".$printlisteners."</span></div></td>";
     }
     }
     }
