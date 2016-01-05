@@ -14,7 +14,7 @@ header("refresh: 60;");
 echo "<style>";
 include 'tacticsboard.css';
 echo "</style>";
-echo "<div><span class=headline>TACTICS</span></div>";
+echo "<div><span class=headline>TACTICS</span></div><p>";
 echo "<div><span class=tstamp>".date(DATE_RFC822)."</span></div>";
 echo "<hr><br>";
 
@@ -37,8 +37,8 @@ $dead = ( $now - 60 );
 
 echo "<div><span class=sumsum>".$printlistenersumsum."</span></div>";
 echo "<hr><p>";
-echo "ATTENTION: BANDWIDH in KBIT/s // LOAD in &#37; // BANDWIDTH SUM WITHOUT PROXIES";
-echo "<p><hr>";
+echo "ATTENTION: BANDWIDH in KBIT/S ||| LOAD in &#37; ||| BANDWIDTH SUM WITHOUT PROXIES";
+echo "<p><hr><p>";
 echo "<table borderx=1>";
 echo "<tr><th class=rotatex><div><span>TSTAMP</span></div></th><th class=rotatex><div><span>IP</span></div></th><th class=rotatex><div><span>BW</span></div></th><th class=rotatex><div><span>BWLIMIT</span></div></th><th class=rotatex><div><span>LOAD</span></div></th><th class=rotatex><div><span>LISTENERS</span></div></th>";
     while ( $row2 = $results2->fetchArray() ) {
