@@ -8,7 +8,7 @@ error_reporting(E_ALL);
 
 $db = new SQLite3('load.db');
 $results = $db->query("SELECT sum(listeners) FROM t_pool");
-$results2 = $db->query("SELECT sum(bandwidth) FROM t_pool where mountpoint not like '%proxy%' order by machineip group by machineip");
+$results2 = $db->query("SELECT bandwidth,machineip FROM t_pool where mountpoint not like '%proxy%' group by machineip");
 
 # eliminating intro mountpoint self listening
 $intromounts = $db->query("SELECT listeners FROM t_pool where mountpoint like '/intro%'");
@@ -23,9 +23,9 @@ while ( $row = $results->fetchArray() ) {
 }
 while ( $row2 = $results2->fetchArray() ) {
     if (empty($row2[0])) {
-	$bwsum = 0;
+	$bwsum += 0;
     } else {
-	$bwsum = $row2[0];
+	$bwsum += $row2[0];
     }
 }
 

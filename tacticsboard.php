@@ -18,9 +18,9 @@ echo "<div><span class=headline>TACTICS</span></div>";
 echo "<div><span class=tstamp>".date(DATE_RFC822)."</span></div>";
 echo "<hr><br>";
 
-$results9 = $db->query("SELECT sum(bandwidth) FROM t_pool where mountpoint not like '%proxy%'");
+$results9 = $db->query("SELECT bandwidth,machineip FROM t_pool where mountpoint not like '%proxy%' group by machineip");
 while ( $row9 = $results9->fetchArray() ) {
-    $bwsumsum = $row9[0];
+    $bwsumsum += $row9[0];
 }
 
 $results7 = $db->query("SELECT sum(listeners) FROM t_pool");
