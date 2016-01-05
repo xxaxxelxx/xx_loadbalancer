@@ -86,25 +86,29 @@ while ( $row = $results->fetchArray() ) {
     echo "<td align=right><div class=$LINESTYLE><span>".$printlistenersum."</span></div></td>";
 
     while ( $row2 = $results2->fetchArray() ) {
-    $mountpoint = ltrim ($row2['mountpoint'], '/');
-    $results3 = $db->query("SELECT sum(listeners) FROM t_pool where mountpoint like \"%".$mountpoint."\" and machineip like \"".$row['machineip']."\" ");
+	$mountpoint = ltrim ($row2['mountpoint'], '/');
+	$results3 = $db->query("SELECT sum(listeners) FROM t_pool where mountpoint like \"%".$mountpoint."\" and machineip like \"".$row['machineip']."\" ");
     
-    $listeners = NULL;
-    while ( $row3 = $results3->fetchArray() ) {
-        $listeners = $row3[0];
-    }
-    if ( is_null($listeners) ) {
-        echo "<td align=right><div class=$LINESTYLE><span>&nbsp;</span></div></td>";
-    } else {
-        $intromounts = $db->query("SELECT listeners FROM t_pool where machineip like \"".$row['machineip']."\" and mountpoint like '/intro.$mountpoint'");
-        $numberof_intromounts = 0; while ( $row4 = $intromounts->fetchArray() ) { $numberof_intromounts++; };
-        $printlisteners = $listeners - $numberof_intromounts;
-    if ( $LINESTYLE == 'DEAD' ) {
-	    echo "<td align=right><div class=$LINESTYLE><span>".$printlisteners."</span></div></td>";
-    } else {
-	    echo "<td align=right><div class=$LINESTYLE style='background-color: lightgreen;'><span><a href='http://".$row['machineip']."/".$mountpoint."' >".$printlisteners."</a></span></div></td>";
-    }
-    }
+	$listeners = NULL;
+	while ( $row3 = $results3->fetchArray() ) {
+    	    $listeners = $row3[0];
+	}
+	if ( is_null($listeners) ) {
+    	    echo "<td align=right><div class=$LINESTYLE><span>&nbsp;</span></div></td>";
+	} else {
+    	    $intromounts = $db->query("SELECT listeners FROM t_pool where machineip like \"".$row['machineip']."\" and mountpoint like '/intro.$mountpoint'");
+    	    $numberof_intromounts = 0; while ( $row4 = $intromounts->fetchArray() ) { $numberof_intromounts++; };
+    	    $printlisteners = $listeners - $numberof_intromounts;
+	    if ( $LINESTYLE == 'DEAD' ) {
+		echo "<td align=right><div class=$LINESTYLE><span>".$printlisteners."</span></div></td>";
+	    } else {
+		if ( $mountpoint != 'proxy' ) {
+		    echo "<td align=right><div class=$LINESTYLE style='background-color: lightgreen;'><span><a href='http://".$row['machineip']."/".$mountpoint."' >".$printlisteners."</a></span></div></td>";
+		} else {
+		    echo "<td align=right><div class=$LINESTYLE style='background-color: blue;'><span>PROXY</span></div></td>";
+		}
+	    }
+	}
     }
     echo "</tr>\n";
 }
