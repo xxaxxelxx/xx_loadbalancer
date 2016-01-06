@@ -5,7 +5,7 @@ body {
 
 th.sum {
     border-top: 1px solid gray;
-    background-color: gray;
+    background-color: purple;
 }
 
 
@@ -19,7 +19,7 @@ th.rotate {
 th.rotate > div {
   transform: 
     /* Magic Numbers */
-    translate(15px, 65px)
+    translate(28px, 65px)
     /* 45 is really 360 - 45 */
     rotate(290deg);
   width: 0px
@@ -36,7 +36,7 @@ border: 1px;
 }
 
 td {
-    width: 3em;
+    xwidth: 3em;
     xborder-right: solid grey 1px;
 }
 
@@ -75,6 +75,10 @@ div.OVERLOAD90 {
 th {
     text-align: left;
     vertical-align: center;
+}
+
+div.th {
+    width: 40px;
 }
 
 span.headline {

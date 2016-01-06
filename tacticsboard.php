@@ -60,7 +60,7 @@ echo "<tr><th class=sumx><div><span>&nbsp;</span></div></th><th class=sumx><div>
 #    $numberof_intromounts3 = 0; while ( $row10 = $intromounts3->fetchArray() ) { $numberof_intromounts3++; };
 #    $printlistenermntsum = $listenermntsum - $numberof_intromounts3;
     $printlistenermntsum = $listenermntsum;
-    echo "<th class=sum ><div align=right><span>".$printlistenermntsum."</span></div></th>";
+    echo "<th class=sum ><div class=th align=right><span>".$printlistenermntsum."</span></div></th>";
     }
 echo "</tr>\n";
 
