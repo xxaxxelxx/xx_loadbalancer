@@ -107,7 +107,7 @@ while ( $row = $results->fetchArray() ) {
 		echo "<td align=right><div class=$LINESTYLE><span>".$printlisteners."</span></div></td>";
 	    } else {
 		if ( $mountpoint != 'proxy' ) {
-		    echo "<td align=right><div class=$LINESTYLE style='background-color: lightgreen;'><span><a href='http://".$row['machineip']."/".$mountpoint."' >".$printlisteners."</a></span></div></td>";
+		    echo "<td align=right><div class=$LINESTYLE style='background-color: lightgreen;'><span><a class=link2mount href='http://".$row['machineip']."/".$mountpoint."' >".$printlisteners."</a></span></div></td>";
 		} else {
 		    echo "<td align=right><div class=$LINESTYLE style='background-color: blue;'><span>PROXY</span></div></td>";
 		}

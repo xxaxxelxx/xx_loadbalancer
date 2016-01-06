@@ -96,3 +96,9 @@ span.sumsum {
     font-decoration: bold; 
 }
 
+a.link2mount {
+    color: black;
+    text-decoration: none;
+    xfont-weight: bold;
+    xfont-family: courier;
+}
