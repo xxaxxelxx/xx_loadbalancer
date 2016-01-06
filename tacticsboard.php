@@ -11,6 +11,7 @@ $results = $db->query("SELECT machineip,bandwidth,bandwidthlimit,load,timestamp 
 $results2 = $db->query("SELECT mountpoint FROM t_pool where mountpoint not like \"/intro.%\" group by mountpoint order by mountpoint");
 
 header("refresh: 60;");
+echo '<head><title>TACTICS</title></head>';
 echo "<style>";
 include 'tacticsboard.css';
 echo "</style>";
