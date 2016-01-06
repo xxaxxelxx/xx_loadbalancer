@@ -7,13 +7,14 @@ init_db();
 error_reporting(E_ALL);
 
 $db = new SQLite3('load.db');
-$results = $db->query("SELECT machineip,bandwidth,bandwidthlimit,load FROM t_pool group by machineip");
+$results = $db->query("SELECT machineip,bandwidth,bandwidthlimit,load,listeners FROM t_pool group by machineip");
 
 while ( $row = $results->fetchArray() ) {
    echo $row['machineip']."|";
    echo $row['bandwidth']."|";
    echo $row['bandwidthlimit']."|";
-   echo $row['load']."\n";
+   echo $row['load']."|";
+   echo $row['listeners']."\n";
 }
 $db->close();
 ?>
