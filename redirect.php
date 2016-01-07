@@ -46,7 +46,7 @@ $tstampoldest = $tstampnow - $tmaxage;
 error_reporting(E_ALL);
 
 # maximum accepted load of a player
-$maxload = 70;
+$maxload = 75;
 
 # within which time in seconds clients will stay in pool
 $maxage = 3600;
