@@ -50,7 +50,7 @@ echo "<tr><th class=rotatex><div><span>TSTAMP</span></div></th><th class=rotatex
     }
 echo "</tr>\n";
 
-echo "<tr><th class=sumx><div><span>&nbsp;</span></div></th><th class=sumx><div><span>&nbsp;</span></div></th><th class=sum><div align=right><span>".$bwsumsum."</span></div></th><th class=sumx><div><span>&nbsp;</span></div></th><th class=sumx><div><span>&nbsp;</span></div></th><th class=sum><div align=right><span>".$printlistenersumsum."</span></div></th>";
+echo "<tr><th class=sumx><div><span>&nbsp;</span></div></th><th class=sumx><div><span>&nbsp;</span></div></th><th class=sum><div align=right><span>".$bwsumsum."</span></div></th><th class=sumx><div><span>&nbsp;</span></div></th><th class=sumx><div><span>&nbsp;</span></div></th><th class=sumx><div><span>&nbsp;</span></div></th><th class=sum><div align=right><span>".$printlistenersumsum."</span></div></th>";
     while ( $row2 = $results2->fetchArray() ) {
     $mountpoint = ltrim ($row2['mountpoint'], '/');
     $results9 = $db->query("SELECT sum(listeners) FROM t_pool where mountpoint like \"%".$mountpoint."\" ");
@@ -118,6 +118,6 @@ while ( $row = $results->fetchArray() ) {
     }
     echo "</tr>\n";
 }
-echo "</table>";
+echo "</table><p><hr><p>";
 $db->close();
 ?>
