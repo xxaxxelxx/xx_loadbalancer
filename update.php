@@ -4,7 +4,7 @@ $bandwidth = $_GET['bw'];
 $bandwidthlimit = $_GET['bwl'];
 $mountpoints = $_GET['mnt'];
 $load = $_GET['load'];
-$loadlimit = $_GET['loadlimit'];
+$loadlimit = $_GET['loadl'];
 $tstampnow = time();
 
 include("functions.php");
