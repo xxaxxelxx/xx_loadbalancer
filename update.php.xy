@@ -4,7 +4,6 @@ $bandwidth = $_GET['bw'];
 $bandwidthlimit = $_GET['bwl'];
 $mountpoints = $_GET['mnt'];
 $load = $_GET['load'];
-$loadlimit = $_GET['loadlimit'];
 $tstampnow = time();
 
 include("functions.php");
@@ -13,7 +12,7 @@ init_db();
 
 error_reporting(E_ALL);
 
-if ( ! isset($ip,$bandwidth,$bandwidthlimit,$mountpoints,$load,$loadlimit) ) exit;
+if ( ! isset($ip,$bandwidth,$bandwidthlimit,$mountpoints,$load) ) exit;
 
 $maxage = 3600;
 $maxagelimitstamp = $tstampnow - $maxage; 
@@ -36,7 +35,6 @@ foreach ($a_mountpoints as $mountpoint) {
 	listeners,
 	mountpoint,
 	load,
-	loadlimit,
 	timestamp) VALUES (
 	'$target',
 	'$ip',
@@ -45,7 +43,6 @@ foreach ($a_mountpoints as $mountpoint) {
 	$listeners,
 	'$mnt',
 	$load,
-	$loadlimit,
 	$tstampnow)");
 }; 
 $db->close();
