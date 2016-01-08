@@ -73,6 +73,7 @@ while ( $row = $results->fetchArray() ) {
     echo "<td align=right><div class=$LINESTYLE><span>".$row['bandwidthlimit']."</span></div></td>";
     echo "<td align=right><div class=$LINESTYLE><span class=$SPANSTYLE_CPU>".$row['load']."</span></div></td>";
     echo "<td align=right><div class=$LINESTYLE><span>".$row['loadlimit']."</span></div></td>";
+    $SPANSTYLE_CPU = ''; $SPANSTYLE_BW = '';
     $results5 = $db->query("SELECT sum(listeners) FROM t_pool where machineip like \"".$row['machineip']."\" ");
     while ( $row5 = $results5->fetchArray() ) {
         $listenersum = $row5[0];
