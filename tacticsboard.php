@@ -70,8 +70,8 @@ while ( $row = $results->fetchArray() ) {
     if ( $LINESTYLE == 'A' ) { $LINESTYLE = 'B'; } else { $LINESTYLE = 'A';};
     echo "<tr>";
     if ( $row['timestamp'] < $dead ) { $LINESTYLE = 'DEAD'; };
-    if ( $row['load'] >= $row['loadlimit'] ) { $LINESTYLE = 'OVERLOAD'; };
-    if ( $row['bandwidth'] >= $row['bandwidthlimit'] ) { $LINESTYLE = 'OVERLOAD'; };
+    if ( $row['load'] >= $row['loadlimit'] && $row['loadlimit'] != 0 ) { $LINESTYLE = 'OVERLOAD'; };
+    if ( $row['bandwidth'] >= $row['bandwidthlimit'] && $row['bandwidthlimit'] != 0 ) { $LINESTYLE = 'OVERLOAD'; };
     if ( $row['load'] >= 90 ) { $LINESTYLE = 'OVERLOAD90'; };
     if ( $row['load'] >= 100 ) { $LINESTYLE = 'OVERLOAD100'; };
     echo "<td align=right><div class=$LINESTYLE><span>".$row['timestamp']."</span></div></td>";
