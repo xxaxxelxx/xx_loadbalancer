@@ -56,6 +56,10 @@ div.DEAD {
     color: black;
     font-weight: bold;
 }
+span.REDTXT {
+    color: red;
+    xfont-weight: bold;
+}
 div.OVERLOAD {
     background-color: yellow;
     color: black;
