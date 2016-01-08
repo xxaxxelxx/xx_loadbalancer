@@ -83,7 +83,7 @@ while ( $row = $results->fetchArray() ) {
 
     while ( $row2 = $results2->fetchArray() ) {
 	$mountpoint = ltrim ($row2['mountpoint'], '/');
-	$results3 = $db->query("SELECT sum(listeners) FROM t_pool where timestamp > ".$dead." mountpoint like \"%".$mountpoint."\" and machineip like \"".$row['machineip']."\" ");
+	$results3 = $db->query("SELECT sum(listeners) FROM t_pool where timestamp > ".$dead." AND mountpoint like \"%".$mountpoint."\" and machineip like \"".$row['machineip']."\" ");
     
 	$listeners = NULL;
 	while ( $row3 = $results3->fetchArray() ) {
