@@ -7,7 +7,7 @@ init_db();
 error_reporting(E_ALL);
 
 $db = new SQLite3('load.db');
-$results = $db->query("SELECT machineip,bandwidth,bandwidthlimit,load,loadlimit,timestamp FROM t_pool group by machineip");
+$results = $db->query("SELECT machineip,bandwidth,bandwidthlimit,load,timestamp FROM t_pool group by machineip");
 $results2 = $db->query("SELECT mountpoint FROM t_pool where mountpoint not like \"/intro.%\" group by mountpoint order by mountpoint");
 
 header("refresh: 60;");
@@ -43,7 +43,7 @@ echo "<hr><p>";
 echo "ATTENTION: BANDWIDH in KBIT/S ||| LOAD in &#37; ||| BANDWIDTH SUM WITHOUT PROXIES";
 echo "<p><hr><p>";
 echo "<table borderx=1>";
-echo "<tr><th class=rotatex><div><span>TSTAMP</span></div></th><th class=rotatex><div><span>IP</span></div></th><th class=rotatex><div><span>BW</span></div></th><th class=rotatex><div><span>BWLIMIT</span></div></th><th class=rotatex><div><span>LOAD</span></div></th><th class=rotatex><div><span>LOADLIMIT</span></div></th><th class=rotatex><div><span>LISTENERS</span></div></th>";
+echo "<tr><th class=rotatex><div><span>TSTAMP</span></div></th><th class=rotatex><div><span>IP</span></div></th><th class=rotatex><div><span>BW</span></div></th><th class=rotatex><div><span>BWLIMIT</span></div></th><th class=rotatex><div><span>LOAD</span></div></th><th class=rotatex><div><span>LISTENERS</span></div></th>";
     while ( $row2 = $results2->fetchArray() ) {
     $mountpoint = ltrim ($row2['mountpoint'], '/');
     echo "<th class=rotate><div><span>".$mountpoint."</span></div></th>";
@@ -70,15 +70,14 @@ while ( $row = $results->fetchArray() ) {
     if ( $LINESTYLE == 'A' ) { $LINESTYLE = 'B'; } else { $LINESTYLE = 'A';};
     echo "<tr>";
     if ( $row['timestamp'] < $dead ) { $LINESTYLE = 'DEAD'; };
-    if ( $row['load'] >= $row['loadlimit'] ) { $LINESTYLE = 'OVERLOAD'; };
-    if ( $row['load'] >= 90 ) { $LINESTYLE = 'OVERLOAD90'; };
-    if ( $row['load'] >= 100 ) { $LINESTYLE = 'OVERLOAD100'; };
+    if ( $row['load'] >= 75 ) { $LINESTYLE = 'OVERLOAD70'; };
+    if ( $row['load'] >= 90 ) { $LINESTYLE = 'OVERLOAD80'; };
+    if ( $row['load'] >= 100 ) { $LINESTYLE = 'OVERLOAD90'; };
     echo "<td align=right><div class=$LINESTYLE><span>".$row['timestamp']."</span></div></td>";
     echo "<td align=left><div class=$LINESTYLE><span>".$row['machineip']."</span></div></td>";
     echo "<td align=right><div class=$LINESTYLE><span>".$row['bandwidth']."</span></div></td>";
     echo "<td align=right><div class=$LINESTYLE><span>".$row['bandwidthlimit']."</span></div></td>";
     echo "<td align=right><div class=$LINESTYLE><span>".$row['load']."</span></div></td>";
-    echo "<td align=right><div class=$LINESTYLE><span>".$row['loadlimit']."</span></div></td>";
     $results5 = $db->query("SELECT sum(listeners) FROM t_pool where machineip like \"".$row['machineip']."\" ");
     while ( $row5 = $results5->fetchArray() ) {
         $listenersum = $row5[0];
