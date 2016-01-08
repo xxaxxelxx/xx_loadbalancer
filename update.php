@@ -13,7 +13,8 @@ init_db();
 
 error_reporting(E_ALL);
 
-$loadlimit = 77;
+if ( ! isset($loadlimit) ) { $loadlimit = 77; };
+
 if ( ! isset($ip,$bandwidth,$bandwidthlimit,$mountpoints,$load,$loadlimit) ) exit;
 
 $maxage = 3600;
