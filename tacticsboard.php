@@ -32,7 +32,6 @@ $printlistenersumsum = $listenersumsum;
 
 $date = new DateTime();
 $now = $date->getTimestamp();
-$deadgrey = ( $now - ( 3600 * 24 * 7 ) );
 $dead = ( $now - 60 );
 
 echo "<div><span class=sumsum>".$printlistenersumsum."</span></div>";
