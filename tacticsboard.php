@@ -63,7 +63,7 @@ $LINESTYLE = ''; $SPANSTYLE_CPU = ''; $SPANSTYLE_BW = '';
 while ( $row = $results->fetchArray() ) {
     if ( $LINESTYLE == 'A' ) { $LINESTYLE = 'B'; } else { $LINESTYLE = 'A';};
     echo "<tr>";
-    if ( $row['timestamp'] < $deadgrey ) { $LINESTYLE = 'DEAD'; };
+    if ( $row['timestamp'] < $dead ) { $LINESTYLE = 'DEAD'; };
     if ( $row['load'] >= $row['loadlimit'] && $row['loadlimit'] != 0 ) { $LINESTYLE = 'OVERLOAD'; $SPANSTYLE_CPU = 'REDTXT'; };
     if ( $row['bandwidth'] >= $row['bandwidthlimit'] && $row['bandwidthlimit'] != 0 ) { $LINESTYLE = 'OVERLOAD'; $SPANSTYLE_BW = 'REDTXT'; };
     if ( $row['load'] >= 90 ) { $LINESTYLE = 'OVERLOAD90'; };
