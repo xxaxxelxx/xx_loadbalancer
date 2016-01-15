@@ -26,13 +26,13 @@ while ( $row9 = $results9->fetchArray() ) {
 
 $results10 = $db->query("SELECT machineip FROM t_pool group by machineip");
 $machinesumsum = 0;
-while ( $row10 = $results9->fetchArray() ) {
+while ( $row10 = $results10->fetchArray() ) {
     $machinesumsum += 1;
 }
 
 $results11 = $db->query("SELECT mountpoint FROM t_pool where mountpoint not like '%proxy%' and  mountpoint not like '%intro%' group by mountpoint");
 $mountpointsumsum = 0;
-while ( $row11 = $results9->fetchArray() ) {
+while ( $row11 = $results11->fetchArray() ) {
     $mountpointsumsum += 1;
 }
 
