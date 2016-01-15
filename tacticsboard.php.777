@@ -24,19 +24,6 @@ while ( $row9 = $results9->fetchArray() ) {
     $bwsumsum += $row9[0];
 }
 
-$results10 = $db->query("SELECT machineip FROM t_pool group by machineip");
-$machinesumsum = 0;
-while ( $row10 = $results9->fetchArray() ) {
-    $machinesumsum += 1;
-}
-
-$results11 = $db->query("SELECT mountpoint FROM t_pool where mountpoint not like '%proxy%' and  mountpoint not like '%intro%' group by mountpoint");
-$mountpointsumsum = 0;
-while ( $row11 = $results9->fetchArray() ) {
-    $mountpointsumsum += 1;
-}
-
-
 $results7 = $db->query("SELECT sum(listeners) FROM t_pool");
 while ( $row7 = $results7->fetchArray() ) {
     $listenersumsum = $row7[0];
@@ -47,7 +34,7 @@ $date = new DateTime();
 $now = $date->getTimestamp();
 $dead = ( $now - 60 );
 
-echo "<div><span class=sumsum>".$printlistenersumsum." Listeners ||| ".$machinesumsum." Machines ||| ".$mountpointsumsum." Mountpoints</span></div>";
+echo "<div><span class=sumsum>".$printlistenersumsum."</span></div>";
 echo "<hr><p>";
 echo "ATTENTION: BANDWIDH in KBIT/S ||| LOAD in &#37; ||| BANDWIDTH SUM WITHOUT PROXIES";
 echo "<p><hr><p>";
