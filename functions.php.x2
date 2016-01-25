@@ -13,7 +13,6 @@ $db-> exec("CREATE TABLE IF NOT EXISTS t_pool(
    timestamp INTEGER NOT NULL DEFAULT 0)");
 $db-> exec("CREATE TABLE IF NOT EXISTS t_listeners(
    fingerprint TEXT PRIMARY KEY DEFAULT 'default', 
-   mountpoint TEXT NOT NULL DEFAULT '/unknown',
    timestamp INTEGER NOT NULL DEFAULT 0)");
 $db->close();
 }
@@ -26,11 +25,6 @@ $db->close();
 function cleanup_listeners($maxagelimitstamp) {
 $db = new SQLite3('load.db');
 $db->exec("DELETE FROM t_listeners WHERE timestamp < $maxagelimitstamp");
-$db->close();
-}
-function cleanup_listeners_othermounts($maxagelimitstamp_othermounts,$fingerprint,$mountpoint) {
-$db = new SQLite3('load.db');
-$db->exec("DELETE FROM t_listeners WHERE timestamp < $maxagelimitstamp_othermounts AND fingerprint = '$fingerprint' AND mountpoint != '$mountpoint'");
 $db->close();
 }
 

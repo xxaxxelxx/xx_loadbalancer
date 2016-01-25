@@ -53,14 +53,9 @@ $maxage = 3600;
 $maxagelimitstamp = $tstampnow - $maxage; 
 cleanup_listeners($maxagelimitstamp);
 
-
 if ( ! isset($ip,$agent,$mountpoint) ) exit;
 
-$fingerprint = md5($ip.$agent);
-
-$maxage_othermounts = 600;
-$maxagelimitstamp_othermounts = $tstampnow - $maxage_othermounts; 
-cleanup_listeners_othermounts($maxagelimitstamp_othermounts,$fingerprint,$mountpoint);
+$fingerprint = md5($ip.$agent.$mountpoint);
 
 $db = new SQLite3('load.db');
 #$result = $db->query("SELECT * FROM t_pool WHERE mountpoint LIKE '/$mountpoint' AND load <= $maxload AND timestamp > $tstampoldest ORDER BY bandwidth ASC LIMIT 1");
@@ -68,7 +63,7 @@ $db = new SQLite3('load.db');
 $result = $db->query("SELECT * FROM t_pool WHERE mountpoint LIKE '/$mountpoint' AND ( loadlimit = 0 OR load < loadlimit ) AND timestamp > $tstampoldest AND ( bandwidthlimit = 0 OR bandwidth < bandwidthlimit ) ORDER BY bandwidth ASC LIMIT 1");
 #echo $db->lastErrorMsg();
 
-$wellknown = $db->query("SELECT * FROM t_listeners WHERE fingerprint = '$fingerprint' and mountpoint = '$mountpoint'");
+$wellknown = $db->query("SELECT * FROM t_listeners WHERE fingerprint = '$fingerprint'");
 
 $errortext = "this stream is not available";
 $errorspeech = urlencode($errortext);
@@ -86,10 +81,8 @@ while ( $row = $result->fetchArray() ) {
 
 $db->exec("REPLACE INTO t_listeners (
 	fingerprint,
-	mountpoint,
 	timestamp) VALUES (
 	'$fingerprint',
-	'$mountpoint',
 	$tstampnow)");
 
 $db->close();
