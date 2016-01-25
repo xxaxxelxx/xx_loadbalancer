@@ -60,7 +60,7 @@ $fingerprint = md5($ip.$agent);
 
 $maxage_othermounts = 600;
 $maxagelimitstamp_othermounts = $tstampnow - $maxage_othermounts; 
-cleanup_listeners_othermounts($maxagelimitstamp_othermounts,$fingerprint,$mountpoint);
+#cleanup_listeners_othermounts($maxagelimitstamp_othermounts,$fingerprint,$mountpoint);
 
 $db = new SQLite3('load.db');
 #$result = $db->query("SELECT * FROM t_pool WHERE mountpoint LIKE '/$mountpoint' AND load <= $maxload AND timestamp > $tstampoldest ORDER BY bandwidth ASC LIMIT 1");
