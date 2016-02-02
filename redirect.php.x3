@@ -80,7 +80,7 @@ while ( $wrow = $wellknown->fetchArray() ) {
 }
 while ( $row = $result->fetchArray() ) {
     $mount = ltrim($row['mountpoint'],'/');
-    $redirect = "Location: http://".$row['machineip'].":8000".$prefix.$mount;
+    $redirect = "Location: http://".$row['machineip'].$prefix.$mount;
 }
 
 $db->exec("REPLACE INTO t_listeners (
