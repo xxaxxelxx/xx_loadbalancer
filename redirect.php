@@ -74,13 +74,14 @@ $errorspeech = urlencode($errortext);
 
 $redirect = "Location: http://translate.google.com/translate_tts?tl=en&q=".$errorspeech;
 $prefix = "/intro.";
+$playerport = "8000";
 
 while ( $wrow = $wellknown->fetchArray() ) {
     $prefix = "/";
 }
 while ( $row = $result->fetchArray() ) {
     $mount = ltrim($row['mountpoint'],'/');
-    $redirect = "Location: http://".$row['machineip'].":8000".$prefix.$mount;
+    $redirect = "Location: http://".$row['machineip'].":"$playerport.$prefix.$mount;
 }
 
 $db->exec("REPLACE INTO t_listeners (
