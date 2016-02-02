@@ -81,7 +81,7 @@ while ( $wrow = $wellknown->fetchArray() ) {
 }
 while ( $row = $result->fetchArray() ) {
     $mount = ltrim($row['mountpoint'],'/');
-    $redirect = "Location: http://".$row['machineip'].":"$playerport.$prefix.$mount;
+    $redirect = "Location: http://".$row['machineip'].":".$playerport.$prefix.$mount;
 }
 
 $db->exec("REPLACE INTO t_listeners (
