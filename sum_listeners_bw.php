@@ -7,6 +7,8 @@ init_db();
 error_reporting(E_ALL);
 
 $db = new SQLite3('load.db');
+$db->busyTimeout(1000);
+
 $results = $db->query("SELECT sum(listeners) FROM t_pool");
 $results2 = $db->query("SELECT bandwidth,machineip FROM t_pool where mountpoint not like '%proxy%' group by machineip");
 
