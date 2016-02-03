@@ -20,16 +20,19 @@ $db->close();
 
 function cleanup_pool($maxagelimitstamp) {
 $db = new SQLite3('load.db');
+$db->busyTimeout(300);
 $db->exec("DELETE FROM t_pool WHERE timestamp < $maxagelimitstamp");
 $db->close();
 }
 function cleanup_listeners($maxagelimitstamp) {
 $db = new SQLite3('load.db');
+$db->busyTimeout(300);
 $db->exec("DELETE FROM t_listeners WHERE timestamp < $maxagelimitstamp");
 $db->close();
 }
 function cleanup_listeners_othermounts($maxagelimitstamp_othermounts,$fingerprint,$mountpoint) {
 $db = new SQLite3('load.db');
+$db->busyTimeout(300);
 $db->exec("DELETE FROM t_listeners WHERE timestamp < $maxagelimitstamp_othermounts AND fingerprint = '$fingerprint' AND mountpoint != '$mountpoint'");
 $db->close();
 }
