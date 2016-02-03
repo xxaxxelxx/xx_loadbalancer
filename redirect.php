@@ -62,8 +62,7 @@ $maxagelimitstamp_othermounts = $tstampnow - $maxage_othermounts;
 cleanup_listeners_othermounts($maxagelimitstamp_othermounts,$fingerprint,$mountpoint);
 
 $db = new SQLite3('load.db');
-#$result = $db->query("SELECT * FROM t_pool WHERE mountpoint LIKE '/$mountpoint' AND load <= $maxload AND timestamp > $tstampoldest ORDER BY bandwidth ASC LIMIT 1");
-#$result = $db->query("SELECT * FROM t_pool WHERE mountpoint LIKE '/$mountpoint' AND load <= $maxload AND timestamp > $tstampoldest AND ( bandwidthlimit = 0 OR bandwidth < bandwidthlimit ) ORDER BY bandwidth ASC LIMIT 1");
+$db->busyTimeout(3000);
 $result = $db->query("SELECT * FROM t_pool WHERE mountpoint LIKE '/$mountpoint' AND ( loadlimit = 0 OR load < loadlimit ) AND timestamp > $tstampoldest AND ( bandwidthlimit = 0 OR bandwidth < bandwidthlimit ) ORDER BY bandwidth ASC LIMIT 1");
 #echo $db->lastErrorMsg();
 
