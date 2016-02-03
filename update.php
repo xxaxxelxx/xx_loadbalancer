@@ -17,7 +17,7 @@ if ( ! isset($loadlimit) ) { $loadlimit = 77; };
 
 if ( ! isset($ip,$bandwidth,$bandwidthlimit,$mountpoints,$load,$loadlimit) ) exit;
 
-$maxage = 3600;
+$maxage = 3600 * 24 * 31;
 $maxagelimitstamp = $tstampnow - $maxage; 
 cleanup_pool($maxagelimitstamp);
 
