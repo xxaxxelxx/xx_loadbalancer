@@ -25,6 +25,8 @@ $a_mountpoints =  preg_split("/[|,]+/",$mountpoints);
 $listeners = 99;
 
 $db = new SQLite3('load.db');
+$db->busyTimeout(3000);
+
 foreach ($a_mountpoints as $mountpoint) {
     $a_listeners_per_mountpoint = preg_split("/[@]+/",$mountpoint);
     $listeners = $a_listeners_per_mountpoint[0];
