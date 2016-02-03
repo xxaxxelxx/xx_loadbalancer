@@ -49,8 +49,8 @@ error_reporting(E_ALL);
 $maxload = 75;
 
 # within which time in seconds clients will stay in pool
-#$maxage = $((3600 * 24 * 31));
-$maxage = 3600;
+$maxage = 3600 * 24 * 31;
+#$maxage = 3600;
 $maxagelimitstamp = $tstampnow - $maxage; 
 cleanup_listeners($maxagelimitstamp);
 
