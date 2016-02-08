@@ -49,8 +49,7 @@ error_reporting(E_ALL);
 $maxload = 75;
 
 # within which time in seconds clients will stay in pool
-#$maxage = 3600;
-$maxage = 300;
+$maxage = 3600;
 $maxagelimitstamp = $tstampnow - $maxage; 
 cleanup_listeners($maxagelimitstamp);
 
@@ -58,8 +57,7 @@ if ( ! isset($ip,$agent,$mountpoint) ) exit;
 
 $fingerprint = md5($ip.$agent);
 
-#$maxage_othermounts = 600;
-$maxage_othermounts = 300;
+$maxage_othermounts = 600;
 $maxagelimitstamp_othermounts = $tstampnow - $maxage_othermounts; 
 cleanup_listeners_othermounts($maxagelimitstamp_othermounts,$fingerprint,$mountpoint);
 
